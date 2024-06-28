@@ -10,6 +10,13 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
 import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.soloader.SoLoader
+import com.revenuecat.purchases.CustomerInfo;
+import com.revenuecat.purchases.Entitlement;
+import com.revenuecat.purchases.Offering;
+import com.revenuecat.purchases.Purchases;
+import com.revenuecat.purchases.models.Period;
+import com.revenuecat.purchases.models.Price;
+import com.revenuecat.purchases.models.StoreProduct;
 
 class MainApplication : Application(), ReactApplication {
 
