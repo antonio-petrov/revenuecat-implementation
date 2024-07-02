@@ -9,7 +9,7 @@ import React, {useEffect} from 'react';
 import type {PropsWithChildren} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-import PurchasesService from '../src/services/PurchasesService';
+import PurchasesService from './src/services/PurchasesService';
 
 type SectionProps = PropsWithChildren<{
   title: string;

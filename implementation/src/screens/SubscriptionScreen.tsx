@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { View, Button, Text } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Button, Text} from 'react-native';
 import PurchasesService from '../services/PurchasesService';
-import Purchases, {
-  PurchasesOffering,
-  PurchasesPackage,
-  CustomerInfo,
-} from 'react-native-purchases';
+import {PurchasesOffering, PurchasesPackage} from 'react-native-purchases';
 
 const SubscriptionScreen = () => {
   const [offerings, setOfferings] = useState<PurchasesOffering | null>(null);
@@ -17,8 +13,12 @@ const SubscriptionScreen = () => {
   }, []);
 
   const fetchOfferings = async () => {
-    const offerings = await PurchasesService.getOfferings();
-    setOfferings(offerings);
+    try {
+      const offeringsData = await PurchasesService.getOfferings();
+      setOfferings(offeringsData);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const checkPremiumStatus = async () => {
@@ -38,7 +38,7 @@ const SubscriptionScreen = () => {
   return (
     <View>
       <Text>Premium Status: {isPremium ? 'Active' : 'Inactive'}</Text>
-      {offerings?.current?.availablePackages.map((pkg) => (
+      {offerings?.availablePackages.map(pkg => (
         <Button
           key={pkg.identifier}
           title={`Buy ${pkg.product.priceString}`}
