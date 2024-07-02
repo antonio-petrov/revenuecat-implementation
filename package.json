@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "react-native": "^0.74.3",
     "react-native-config": "^1.5.2",
     "react-native-purchases": "^7.27.4"
   },
