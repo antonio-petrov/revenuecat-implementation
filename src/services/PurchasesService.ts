@@ -1,4 +1,4 @@
-import Purchases, { CustomerInfo, LOG_LEVEL, PurchasesConfiguration, PurchasesOffering } from 'react-native-purchases';
+import Purchases, { CustomerInfo, LOG_LEVEL, LogInResult, PurchasesConfiguration, PurchasesOffering } from 'react-native-purchases';
 
 const REVENUECAT_API_KEY = 'your_revenuecat_api_key';
 
@@ -23,8 +23,10 @@ class PurchasesService {
   }
 
   public async login(userId: string): Promise<CustomerInfo> {
-    return await Purchases.logIn(userId);
+    const loginResult: LogInResult = await Purchases.logIn(userId);
+    return loginResult.customerInfo;
   }
+
 
   public async logout(): Promise<void> {
     await Purchases.logOut();
@@ -50,8 +52,8 @@ class PurchasesService {
 
   public async checkSubscriptionStatus(): Promise<boolean> {
     const customerInfo = await this.getCustomerInfo();
-    // Replace 'your_entitlement_id' with the actual entitlement ID you're using
-    return customerInfo.entitlements.active['your_entitlement_id'] !== undefined;
+    // TODO: Move the harcoded string elsewhere
+    return customerInfo.entitlements.active['premium_access'] !== undefined;
   }
 }
 
