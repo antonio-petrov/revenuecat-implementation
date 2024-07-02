@@ -5,17 +5,20 @@
  * @format
  */
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import type {PropsWithChildren} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 
 import PurchasesService from './src/services/PurchasesService';
+import SubscriptionScreen from './src/screens/SubscriptionScreen';
 
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
 function App(): React.JSX.Element {
+  const [showSubscriptions, setShowSubscriptions] = useState(false);
+
   useEffect(() => {
     const initializePurchases = async () => {
       try {
@@ -29,18 +32,33 @@ function App(): React.JSX.Element {
     initializePurchases();
   }, []);
 
+  if (showSubscriptions) {
+    return <SubscriptionScreen />;
+  }
+
   return (
-    <View style={styles.backgroundStyle}>
-      <Text>Welcome to your RevenueCat-enabled app!</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Welcome to your RevenueCat-enabled app!</Text>
+      <Button
+        title="View Subscriptions"
+        onPress={() => setShowSubscriptions(true)}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  backgroundStyle: {
+  container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 20,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
   },
 });
 

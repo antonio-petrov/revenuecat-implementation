@@ -1,6 +1,5 @@
-import Purchases, { CustomerInfo, LogInResult, PurchasesOffering } from 'react-native-purchases';
+import Purchases, { CustomerInfo, LogInResult, PurchasesOffering, PurchasesStoreProduct } from 'react-native-purchases';
 import Config from 'react-native-config'
-
 
 class PurchasesService {
   private static _instance: PurchasesService | null = null;
@@ -17,6 +16,7 @@ class PurchasesService {
   }
 
   public async initialize(): Promise<void> {
+    Purchases.setLogLevel(Purchases.LOG_LEVEL.DEBUG);
     await Purchases.configure({ apiKey: Config.REVENUECAT_API_KEY! });
   }
 
@@ -31,8 +31,15 @@ class PurchasesService {
   }
 
   public async getOfferings(): Promise<PurchasesOffering | null> {
-    const offerings = await Purchases.getOfferings();
-    return offerings.current;
+    try {
+      console.log('getOfferings');
+      const offerings = await Purchases.getOfferings();
+      console.log('offerings current: ', offerings.current);
+      return offerings.current;
+    } catch (error) {
+      console.error('Error fetching offerings:', error);
+      return null;
+    }
   }
 
   public async purchasePackage(packageToPurchase: any): Promise<CustomerInfo> {
@@ -50,8 +57,7 @@ class PurchasesService {
 
   public async checkSubscriptionStatus(): Promise<boolean> {
     const customerInfo = await this.getCustomerInfo();
-    // TODO: Move the harcoded string elsewhere
-    return customerInfo.entitlements.active['premium_access'] !== undefined;
+    return customerInfo.entitlements.active[Config.PREMIUM_ENTITLEMENT_NAME!] !== undefined;
   }
 }
 
