@@ -17,6 +17,7 @@ class PurchasesService {
   }
 
   public async initialize(): Promise<void> {
+    Purchases.setLogLevel(Purchases.LOG_LEVEL.DEBUG);
     await Purchases.configure({ apiKey: Config.REVENUECAT_API_KEY! });
   }
 
@@ -31,8 +32,15 @@ class PurchasesService {
   }
 
   public async getOfferings(): Promise<PurchasesOffering | null> {
-    const offerings = await Purchases.getOfferings();
-    return offerings.current;
+    try {
+      console.log('getOfferings');
+      const offerings = await Purchases.getOfferings();
+      console.log('offerings current: ', offerings.current);
+      return offerings.current;
+    } catch (error) {
+      console.error('Error fetching offerings:', error);
+      return null;
+    }
   }
 
   public async purchasePackage(packageToPurchase: any): Promise<CustomerInfo> {
