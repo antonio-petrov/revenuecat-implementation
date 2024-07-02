@@ -11,12 +11,12 @@ import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.soloader.SoLoader
 import com.revenuecat.purchases.CustomerInfo;
-import com.revenuecat.purchases.Entitlement;
 import com.revenuecat.purchases.Offering;
 import com.revenuecat.purchases.Purchases;
 import com.revenuecat.purchases.models.Period;
 import com.revenuecat.purchases.models.Price;
 import com.revenuecat.purchases.models.StoreProduct;
+import com.revenuecat.purchases.PurchasesConfiguration
 
 class MainApplication : Application(), ReactApplication {
 
@@ -46,5 +46,5 @@ class MainApplication : Application(), ReactApplication {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
       load()
     }
-  }
+ }
 }
