@@ -10,4 +10,5 @@ By using react-native, typescript and revenucat create a simple app that allow o
 2. Page where you can view available revenuecat entitlements and whether or not your status is premium
 
 Home screen:
+
 ![image](https://github.com/antonio-petrov/revenuecat-implementation/assets/3749460/bd4cae52-38dd-424a-bcf7-1edba2b9925c)
