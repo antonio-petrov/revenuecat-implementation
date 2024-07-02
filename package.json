@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "react-native-config": "^1.5.2",
     "react-native-purchases": "^7.27.4"
+  },
+  "devDependencies": {
+    "react-native-dotenv": "^3.4.11"
   }
 }

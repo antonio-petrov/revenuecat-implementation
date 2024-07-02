@@ -1,7 +1,5 @@
-import Purchases, { CustomerInfo, LOG_LEVEL, LogInResult, PurchasesConfiguration, PurchasesOffering } from 'react-native-purchases';
-
-const REVENUECAT_API_KEY = 'your_revenuecat_api_key';
-
+import Purchases, { CustomerInfo, LogInResult, PurchasesOffering } from 'react-native-purchases';
+import Config from 'react-native-config'
 
 
 class PurchasesService {
@@ -19,7 +17,7 @@ class PurchasesService {
   }
 
   public async initialize(): Promise<void> {
-    await Purchases.configure({ apiKey: REVENUECAT_API_KEY });
+    await Purchases.configure({ apiKey: Config.REVENUECAT_API_KEY! });
   }
 
   public async login(userId: string): Promise<CustomerInfo> {
