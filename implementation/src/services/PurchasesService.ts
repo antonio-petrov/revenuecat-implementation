@@ -1,6 +1,5 @@
-import Purchases, { CustomerInfo, LogInResult, PurchasesOffering } from 'react-native-purchases';
+import Purchases, { CustomerInfo, LogInResult, PurchasesOffering, PurchasesStoreProduct } from 'react-native-purchases';
 import Config from 'react-native-config'
-
 
 class PurchasesService {
   private static _instance: PurchasesService | null = null;
@@ -58,8 +57,7 @@ class PurchasesService {
 
   public async checkSubscriptionStatus(): Promise<boolean> {
     const customerInfo = await this.getCustomerInfo();
-    // TODO: Move the harcoded string elsewhere
-    return customerInfo.entitlements.active['premium_access'] !== undefined;
+    return customerInfo.entitlements.active[Config.PREMIUM_ENTITLEMENT_NAME!] !== undefined;
   }
 }
 
